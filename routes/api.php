@@ -18,16 +18,21 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
-Route::post('/register', [App\Http\Controllers\API\AppUserController::class, 'register']);
-Route::post('/login', [App\Http\Controllers\API\AppUserController::class, 'login']);
-
-
 Route::group(
-    [
-        'middleware' => 'auth.user-api'
-    ],
+    ['prefix' => 'v1'],
     function () {
+        Route::post('/register', [App\Http\Controllers\API\AppUserController::class, 'register']);
+        Route::post('/login', [App\Http\Controllers\API\AppUserController::class, 'login']);
 
-        Route::get('/profile', [App\Http\Controllers\API\AppUserController::class, 'profile']);
+
+        Route::group(
+            [
+                'middleware' => 'auth.user-api'
+            ],
+            function () {
+
+                Route::get('/profile', [App\Http\Controllers\API\AppUserController::class, 'profile']);
+            }
+        );
     }
 );
