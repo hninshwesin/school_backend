@@ -53,7 +53,7 @@ class AppUserController extends Controller
         if (Auth::guard('user')->attempt($loginData)) {
             $accessToken = Auth::guard('user')->user()->createToken('authToken')->accessToken;
 
-            return response()->json(['error_code' => '0', 'user' => Auth::guard('user')->user(), 'access_token' => $accessToken, 'message' => 'Login successfully']);
+            return response()->json(['error_code' => '0', 'access_token' => $accessToken, 'message' => 'Login successfully']);
         } else {
             return response()->json(['error_code' => '1', 'message' => 'Invalid Credentials'],  403);
         }
