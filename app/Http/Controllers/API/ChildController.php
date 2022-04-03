@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\ChildResourceCollection;
 use App\Models\AppUser;
 use App\Models\Child;
 use Illuminate\Http\Request;
@@ -132,6 +133,20 @@ class ChildController extends Controller
                 return response()->json(['error_code' => '3', 'message' => 'Child Doesn\'t Have!'], 403);
             }
         }
+        if (!$app_user) {
+            return response()->json(['error_code' => '1', 'message' => 'Invalid Credentials'],  403);
+        }
+    }
+
+    public function child_list()
+    {
+        $user = Auth::guard('user-api')->user();
+        $app_user = AppUser::find($user->id);
+
+        $children = Child::where('app_user_id', $app_user->id)->get();
+
+        return new ChildResourceCollection($children);
+
         if (!$app_user) {
             return response()->json(['error_code' => '1', 'message' => 'Invalid Credentials'],  403);
         }

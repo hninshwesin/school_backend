@@ -36,6 +36,7 @@ Route::group(
                 Route::post('/child_delete', [App\Http\Controllers\API\ChildController::class, 'destroy']);
                 Route::post('/class_list', [App\Http\Controllers\API\ClassesController::class, 'class_list']);
                 Route::post('/student_enroll', [App\Http\Controllers\API\ClassesController::class, 'student_enroll']);
+                Route::get('/child_list', [App\Http\Controllers\API\ChildController::class, 'child_list']);
             }
         );
     }
