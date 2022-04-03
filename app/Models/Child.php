@@ -13,4 +13,9 @@ class Child extends Model
     protected $fillable = [
         'name', 'age', 'app_user_id'
     ];
+
+    public function classes()
+    {
+        return $this->belongsToMany(Classes::class, 'school.child_class', 'child_id', 'class_id');
+    }
 }

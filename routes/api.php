@@ -34,6 +34,8 @@ Route::group(
                 Route::get('/profile', [App\Http\Controllers\API\AppUserController::class, 'profile']);
                 Route::post('/child_create', [App\Http\Controllers\API\ChildController::class, 'store']);
                 Route::post('/child_delete', [App\Http\Controllers\API\ChildController::class, 'destroy']);
+                Route::post('/class_list', [App\Http\Controllers\API\ClassesController::class, 'class_list']);
+                Route::post('/student_enroll', [App\Http\Controllers\API\ClassesController::class, 'student_enroll']);
             }
         );
     }

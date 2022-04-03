@@ -21,7 +21,7 @@ class AppUserController extends Controller
 
         $validator = Validator::make($request->all(), [
 
-            'email' => 'required|unique:app_users,email',
+            'email' => 'required|unique:app_users,email|email',
 
             'password' => 'required',
         ]);
@@ -30,7 +30,9 @@ class AppUserController extends Controller
         $password = bcrypt($request->input('password'));
 
         if ($validator->fails()) {
-            return response()->json(['error_code' => '1', 'message' => 'The email has already been taken'],  422);
+            $errors = $validator->errors();
+
+            return response()->json(['error_code' => '1', 'message' => $errors->messages()],  422);
         } else {
             $user = AppUser::create([
                 'email' => $email,
