@@ -16,4 +16,6 @@ class AppUser extends Authenticatable implements MustVerifyEmail
     protected $fillable = [
         'email', 'password',
     ];
+
+    protected $hidden = ['password'];
 }

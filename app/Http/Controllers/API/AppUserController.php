@@ -68,6 +68,6 @@ class AppUserController extends Controller
             return response()->json(['error_code' => '1', 'message' => 'Invalid Credentials'],  403);
         }
 
-        return new AppUserProfileResource($app_user);
+        return response()->json(['error_code' => '0', 'user' => $app_user, 'message' => 'This is Your Profile'], 200);
     }
 }
